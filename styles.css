@@ -90,6 +90,44 @@ header{
   .top-actions{justify-content:flex-start}
 }
 
+@media (max-width: 600px){
+  .wrap{padding:14px 10px 48px}
+
+  /* header */
+  .brand h1{font-size:18px}
+  .brand p{font-size:12px}
+
+  /* single-column controls on small screens */
+  .controls{grid-template-columns:1fr; gap:10px; padding:12px}
+
+  /* scrollable tab bar — no clipping */
+  nav.tabs{overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:6px; scrollbar-width:none}
+  nav.tabs::-webkit-scrollbar{display:none}
+
+  /* card summary: stack level badge + fav on top row, term on its own full-width row */
+  summary{flex-wrap:wrap; padding:10px; gap:8px; align-items:flex-start}
+  .badge{order:1; font-size:11px; padding:4px 8px; gap:5px}
+  .card-actions{order:2; margin-left:auto}
+  .term{order:3; flex:1 1 100%}
+
+  /* allow term text to wrap instead of truncating */
+  .term b{white-space:normal; overflow:visible; text-overflow:unset; font-size:14px}
+  .term span{white-space:normal; overflow:visible; text-overflow:unset}
+
+  /* tighter list padding */
+  .list{padding:8px}
+
+  /* flashcard front — slightly smaller so long terms fit */
+  .flash-main .front{font-size:15px}
+
+  /* row buttons — narrower minimum so 3 fit on one line */
+  .row > .btn{flex:1 1 80px; font-size:12px; padding:9px 10px}
+
+  /* dialog */
+  dialog{width:96vw; border-radius:14px}
+  .dlg{padding:14px}
+}
+
 .field{display:flex; flex-direction:column; gap:6px}
 .field label{font-size:12px; color:var(--muted)}
 
@@ -284,7 +322,7 @@ aside{
   background:rgba(0,0,0,.18);
 }
 .qtitle{margin:0 0 6px; font-size:12px; color:var(--muted)}
-.qprompt{margin:0; font-size:16px; font-weight:900}
+.qprompt{margin:0; font-size:16px; font-weight:900; white-space:pre-wrap}
 
 .options{display:grid; gap:10px; margin-top:10px}
 .opt{
