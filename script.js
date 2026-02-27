@@ -1,0 +1,823 @@
+// -----------------------------
+// Data: UX/UI/HCI glossary (ZH + EN)
+// -----------------------------
+const TERMS = [
+  // Basic — Core
+  {id:"ux", en:"User Experience (UX)", zh:"使用者體驗", level:"Basic", cat:"UX Foundations", zhDef:"使用者在使用產品/服務前中後的整體感受與結果（效率、情緒、信任、滿意）。", enDef:"The overall experience and outcomes before, during, and after using a product or service."},
+  {id:"ui", en:"User Interface (UI)", zh:"使用者介面", level:"Basic", cat:"UX Foundations", zhDef:"使用者看得見並操作的畫面與控制元件（排版、元件、視覺）。", enDef:"The screens, visuals, and controls users see and interact with."},
+  {id:"hci", en:"Human-Computer Interaction (HCI)", zh:"人機互動", level:"Basic", cat:"UX Foundations", zhDef:"研究人如何與互動系統互動，並以科學方法改善設計。", enDef:"The study of how people interact with interactive systems and how to improve them."},
+  {id:"ucd", en:"User-Centered Design (UCD)", zh:"以使用者為中心設計", level:"Basic", cat:"Process & Methods", zhDef:"以使用者需求、情境與限制作為設計決策依據。", enDef:"A design approach driven by users' needs, contexts, and constraints."},
+  {id:"usability", en:"Usability", zh:"可用性", level:"Basic", cat:"Evaluation", zhDef:"使用者是否能有效、有效率且滿意地完成任務。", enDef:"How effectively, efficiently, and satisfactorily users can complete tasks."},
+  {id:"utility", en:"Utility", zh:"有用性（功能價值）", level:"Basic", cat:"Evaluation", zhDef:"功能本身是否真正解決使用者問題與需求。", enDef:"Whether the functionality actually solves users' problems and meets needs."},
+  {id:"a11y", en:"Accessibility (a11y)", zh:"無障礙", level:"Basic", cat:"Accessibility", zhDef:"讓不同能力與情況的人都能使用產品（視覺、聽覺、肢體、認知等）。", enDef:"Making products usable by people with diverse abilities and situations."},
+  {id:"learnability", en:"Learnability", zh:"易學性", level:"Basic", cat:"Evaluation", zhDef:"新手是否能快速理解並上手。", enDef:"How easy it is for first-time users to learn."},
+  {id:"feedback", en:"Feedback", zh:"回饋", level:"Basic", cat:"Interaction Design", zhDef:"使用者操作後，系統清楚告知發生了什麼。", enDef:"System responses that clearly communicate what happened after an action."},
+  {id:"affordance", en:"Affordance", zh:"可供性", level:"Basic", cat:"Interaction Design", zhDef:"物件在情境中『可能怎麼用』的特性（例如按鈕可按）。", enDef:"The possible actions an object allows in a given context."},
+  {id:"signifier", en:"Signifier", zh:"指示性", level:"Basic", cat:"Interaction Design", zhDef:"提示使用者『這裡可以做什麼』的線索（陰影、文字、圖示）。", enDef:"Cues that signal what actions are possible (labels, icons, styling)."},
+  {id:"mapping", en:"Mapping", zh:"對應關係", level:"Basic", cat:"Interaction Design", zhDef:"控制與結果之間是否直覺對應（方向、位置、效果）。", enDef:"How intuitively controls relate to their effects."},
+  {id:"constraints", en:"Constraints", zh:"限制", level:"Basic", cat:"Interaction Design", zhDef:"用限制引導正確操作、降低錯誤（例如只能輸入數字）。", enDef:"Restrictions that guide correct actions and reduce errors."},
+  {id:"discoverability", en:"Discoverability", zh:"可發現性", level:"Basic", cat:"Interaction Design", zhDef:"使用者是否容易看出功能在哪、怎麼用。", enDef:"How easily users can find available actions and features."},
+  {id:"mental_model", en:"Mental Model", zh:"心智模型", level:"Basic", cat:"HCI Theory", zhDef:"使用者根據經驗形成的『我以為它應該怎麼運作』。", enDef:"Users' internal beliefs about how something should work."},
+  {id:"conceptual_model", en:"Conceptual Model", zh:"概念模型", level:"Basic", cat:"HCI Theory", zhDef:"設計者想讓使用者理解的系統運作方式。", enDef:"The design's intended explanation of how the system works."},
+
+  // Basic — UI Components
+  {id:"cta", en:"Call to Action (CTA)", zh:"行動呼籲", level:"Basic", cat:"UI Components", zhDef:"引導關鍵行為的主要按鈕/連結（註冊、購買）。", enDef:"A prominent prompt to take a key action (sign up, buy)."},
+  {id:"modal", en:"Modal / Dialog", zh:"對話框", level:"Basic", cat:"UI Components", zhDef:"覆蓋在內容上、暫停流程要求決策/輸入（慎用）。", enDef:"An overlay that interrupts the flow for decisions or input."},
+  {id:"toast", en:"Toast / Snackbar", zh:"浮出提示", level:"Basic", cat:"UI Components", zhDef:"短暫顯示的非阻斷訊息回饋。", enDef:"A brief, non-blocking feedback message."},
+  {id:"tooltip", en:"Tooltip", zh:"工具提示", level:"Basic", cat:"UI Components", zhDef:"滑過/聚焦時顯示的補充說明。", enDef:"Contextual help shown on hover or focus."},
+  {id:"breadcrumb", en:"Breadcrumb", zh:"麵包屑", level:"Basic", cat:"Information Architecture", zhDef:"顯示所在階層與可回溯路徑。", enDef:"Shows location in a hierarchy and enables backtracking."},
+
+  // Basic — IA & Research
+  {id:"ia", en:"Information Architecture (IA)", zh:"資訊架構", level:"Basic", cat:"Information Architecture", zhDef:"內容如何分類、命名、組織與導覽。", enDef:"How content is organized, labeled, and navigated."},
+  {id:"persona", en:"Persona", zh:"人物誌", level:"Basic", cat:"Research", zhDef:"代表性使用者模型（目標、痛點、行為）。", enDef:"A representative user archetype with goals and behaviors."},
+  {id:"journey_map", en:"Journey Map", zh:"旅程地圖", level:"Basic", cat:"Research", zhDef:"使用者流程、觸點、情緒與痛點的全程可視化。", enDef:"A visualization of steps, touchpoints, emotions, and pain points."},
+  {id:"usability_test", en:"Usability Testing", zh:"可用性測試", level:"Basic", cat:"Research", zhDef:"讓使用者完成任務，觀察是否成功、哪裡卡住、為什麼。", enDef:"Users attempt tasks while you observe success, friction, and reasons."},
+  {id:"wireframe", en:"Wireframe", zh:"線框圖", level:"Basic", cat:"Design Deliverables", zhDef:"低保真布局與結構草圖（先談結構，不談美術）。", enDef:"A low-fidelity layout focusing on structure over visuals."},
+  {id:"prototype", en:"Prototype", zh:"原型", level:"Basic", cat:"Design Deliverables", zhDef:"可互動示意，用來驗證流程與操作。", enDef:"An interactive model used to validate flows and interactions."},
+
+  // Intermediate — Process & IA
+  {id:"double_diamond", en:"Double Diamond", zh:"雙鑽石", level:"Intermediate", cat:"Process & Methods", zhDef:"發散/收斂的流程：探索問題→定義問題→發想→交付。", enDef:"A diverge/converge process: discover → define → develop → deliver."},
+  {id:"design_thinking", en:"Design Thinking", zh:"設計思考", level:"Intermediate", cat:"Process & Methods", zhDef:"同理、定義、發想、原型、測試的迭代方法。", enDef:"An iterative method: empathize, define, ideate, prototype, test."},
+  {id:"lean_ux", en:"Lean UX", zh:"精實UX", level:"Intermediate", cat:"Process & Methods", zhDef:"快速假設→最小驗證→快速迭代，重視學習速度。", enDef:"Rapid hypotheses, experiments, and iterations focused on learning."},
+  {id:"mvp", en:"Minimum Viable Product (MVP)", zh:"最小可行產品", level:"Intermediate", cat:"Process & Methods", zhDef:"用最少功能驗證核心價值與需求。", enDef:"The smallest build that validates core value and demand."},
+  {id:"card_sort", en:"Card Sorting", zh:"卡片分類", level:"Intermediate", cat:"Information Architecture", zhDef:"讓使用者幫你分組內容，以建立更符合直覺的分類。", enDef:"Users group items to inform a more intuitive information structure."},
+  {id:"tree_testing", en:"Tree Testing", zh:"樹測試", level:"Intermediate", cat:"Information Architecture", zhDef:"只測導覽結構（不看UI），看使用者能否找對內容。", enDef:"Tests navigation structure without UI to assess findability."},
+  {id:"microcopy", en:"Microcopy", zh:"微文案", level:"Intermediate", cat:"Content", zhDef:"按鈕、提示、錯誤訊息等短文案，直接影響理解與信任。", enDef:"Short UI text that guides, reassures, and reduces confusion."},
+  {id:"progressive_disclosure", en:"Progressive Disclosure", zh:"漸進揭露", level:"Intermediate", cat:"Interaction Design", zhDef:"先顯示必要資訊，進階選項再展開，降低認知負荷。", enDef:"Reveal complexity only when needed to reduce cognitive load."},
+  {id:"empty_state", en:"Empty State", zh:"空狀態", level:"Intermediate", cat:"UI Patterns", zhDef:"沒有資料時也要提供解釋與下一步引導（不是只顯示空白）。", enDef:"Guidance and next steps when there's no content yet."},
+  {id:"error_message", en:"Error Message", zh:"錯誤訊息", level:"Intermediate", cat:"UI Patterns", zhDef:"清楚說明錯在哪、原因、如何修正，最好就地修正。", enDef:"Clearly explains what went wrong, why, and how to fix it."},
+  {id:"onboarding", en:"Onboarding", zh:"新手引導", level:"Intermediate", cat:"UX Strategy", zhDef:"協助新使用者建立理解、體驗價值並完成第一次成功。", enDef:"Helps new users understand value and achieve first success."},
+  {id:"heuristic_eval", en:"Heuristic Evaluation", zh:"啟發式評估", level:"Intermediate", cat:"Evaluation", zhDef:"專家依可用性準則快速檢查問題（常用 Nielsen 10）。", enDef:"Expert review against usability heuristics to spot issues quickly."},
+  {id:"cog_walk", en:"Cognitive Walkthrough", zh:"認知走查", level:"Intermediate", cat:"Evaluation", zhDef:"以新手角度逐步推演是否會做對、是否看得懂下一步。", enDef:"Step-by-step evaluation of learnability from a novice perspective."},
+  {id:"design_system", en:"Design System", zh:"設計系統", level:"Intermediate", cat:"Design Ops", zhDef:"可重用元件 + 規範 + 原則，確保一致性與可擴展。", enDef:"Reusable components and standards to ensure consistency at scale."},
+  {id:"design_token", en:"Design Token", zh:"設計代幣", level:"Intermediate", cat:"Design Ops", zhDef:"把顏色/字級/間距抽象成變數，跨平台一致更容易。", enDef:"Named design variables (color/type/spacing) shared across platforms."},
+
+  // Intermediate — Metrics
+  {id:"task_success", en:"Task Success Rate", zh:"任務完成率", level:"Intermediate", cat:"Metrics", zhDef:"完成任務的人比例，衡量有效性。", enDef:"The percentage of users who successfully complete a task."},
+  {id:"time_on_task", en:"Time on Task", zh:"任務耗時", level:"Intermediate", cat:"Metrics", zhDef:"完成任務所需時間，衡量效率。", enDef:"The time users need to finish a task (efficiency)."},
+  {id:"sus", en:"System Usability Scale (SUS)", zh:"系統可用性量表", level:"Intermediate", cat:"Metrics", zhDef:"10題問卷快速量化整體可用性分數。", enDef:"A 10-item questionnaire producing a standardized usability score."},
+  {id:"kpi", en:"Key Performance Indicator (KPI)", zh:"關鍵績效指標", level:"Intermediate", cat:"Metrics", zhDef:"衡量產品/商業目標的關鍵數據（轉換、留存等）。", enDef:"Key metrics that track progress toward product/business goals."},
+
+  // Advanced — HCI Laws & Research
+  {id:"fitts", en:"Fitts' Law", zh:"費茲定律", level:"Advanced", cat:"HCI Theory", zhDef:"目標越大、越近，指點越快；常用於按鈕大小與位置。", enDef:"Pointing is faster when targets are larger and closer; informs target sizing/placement."},
+  {id:"hick", en:"Hick's Law", zh:"希克定律", level:"Advanced", cat:"HCI Theory", zhDef:"選項越多/越複雜，決策時間越長；用分組與預設值減少負擔。", enDef:"Decision time increases with number/complexity of choices; use grouping and defaults."},
+  {id:"gestalt", en:"Gestalt Principles", zh:"格式塔原則", level:"Advanced", cat:"HCI Theory", zhDef:"人會自動分組與補全（接近、相似、連續、閉合等）。", enDef:"People perceive patterns/groups (proximity, similarity, continuity, closure, etc.)."},
+  {id:"cog_load", en:"Cognitive Load", zh:"認知負荷", level:"Advanced", cat:"HCI Theory", zhDef:"工作記憶有限；資訊與步驟太多會讓人出錯、放棄。", enDef:"Limited working memory; too much info/steps increases errors and abandonment."},
+  {id:"gulf_exec", en:"Gulf of Execution", zh:"執行落差", level:"Advanced", cat:"HCI Theory", zhDef:"使用者意圖能否順利轉成可操作的動作。", enDef:"The gap between what users want to do and the actions the system makes possible."},
+  {id:"gulf_eval", en:"Gulf of Evaluation", zh:"評估落差", level:"Advanced", cat:"HCI Theory", zhDef:"系統狀態是否容易被看懂、是否知道結果是否正確。", enDef:"The gap between system output and how easily users can interpret it."},
+  {id:"ab_test", en:"A/B Testing", zh:"A/B測試", level:"Advanced", cat:"Experimentation", zhDef:"隨機分流比較兩版本，觀察指標差異以驗證假說。", enDef:"Randomized comparison of two variants to validate impact on metrics."},
+  {id:"effect_size", en:"Effect Size", zh:"效果量", level:"Advanced", cat:"Experimentation", zhDef:"差異有多大（實務意義），比只看顯著更重要。", enDef:"Magnitude of differences (practical impact), often more useful than significance alone."},
+  {id:"dark_patterns", en:"Dark Patterns", zh:"黑暗模式", level:"Advanced", cat:"Ethics", zhDef:"用設計誘導/欺騙使用者做不利決策（例如難取消訂閱）。", enDef:"Deceptive design that manipulates users against their interests."},
+  {id:"privacy_by_design", en:"Privacy by Design", zh:"隱私納入設計", level:"Advanced", cat:"Ethics", zhDef:"預設保護、最小化收集、透明可控，把隱私當設計需求。", enDef:"Building privacy into products by default: minimize data, increase transparency/control."}
+];
+
+// -----------------------------
+// State & Persistence
+// -----------------------------
+const LS_KEY = "ux_learning_progress_v1";
+const LS_UI  = "ux_learning_ui_v1";
+
+const defaultProgress = () => ({
+  // per term: {box:1..5, seen:0/1, correct:0, wrong:0, lastSeen:timestamp, fav:0/1}
+  terms: {},
+  // quiz stats can be stored later if needed
+});
+
+const state = {
+  selectedLevels: new Set(["Basic","Intermediate","Advanced"]),
+  category: "All",
+  search: "",
+  lang: "both",
+  tab: "glossary",
+  progress: defaultProgress(),
+  filtered: [],
+  flash: {
+    currentId: null,
+    flipped: false,
+  },
+  quiz: {
+    questions: [],
+    idx: 0,
+    correct: 0,
+    locked: false,
+    lastChoice: null,
+    mode: "term_to_def",
+    n: 10,
+  }
+};
+
+function loadProgress(){
+  try{
+    const raw = localStorage.getItem(LS_KEY);
+    if(!raw) return;
+    const obj = JSON.parse(raw);
+    if(obj && obj.terms) state.progress = obj;
+  }catch(e){}
+}
+function saveProgress(){
+  localStorage.setItem(LS_KEY, JSON.stringify(state.progress));
+}
+function loadUI(){
+  try{
+    const raw = localStorage.getItem(LS_UI);
+    if(!raw) return;
+    const u = JSON.parse(raw);
+    if(u?.levels){ state.selectedLevels = new Set(u.levels); }
+    if(u?.category) state.category = u.category;
+    if(u?.lang) state.lang = u.lang;
+  }catch(e){}
+}
+function saveUI(){
+  localStorage.setItem(LS_UI, JSON.stringify({
+    levels: [...state.selectedLevels],
+    category: state.category,
+    lang: state.lang,
+  }));
+}
+
+function termProg(id){
+  if(!state.progress.terms[id]){
+    state.progress.terms[id] = {box:1, seen:0, correct:0, wrong:0, lastSeen:0, fav:0};
+  }
+  return state.progress.terms[id];
+}
+
+// -----------------------------
+// Helpers
+// -----------------------------
+const $ = (sel) => document.querySelector(sel);
+const $$ = (sel) => [...document.querySelectorAll(sel)];
+
+function levelDotClass(level){
+  if(level === "Basic") return "basic";
+  if(level === "Intermediate") return "intermediate";
+  return "advanced";
+}
+
+function levelLabel(level){
+  if(level === "Basic") return "Basic 基礎";
+  if(level === "Intermediate") return "Intermediate 中等";
+  return "Advanced 進階";
+}
+
+function escapeHtml(s){
+  return String(s)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+function normalize(s){
+  return String(s).toLowerCase().trim();
+}
+
+function byId(id){
+  return TERMS.find(t => t.id === id);
+}
+
+// -----------------------------
+// Filtering & Rendering
+// -----------------------------
+function computeCategories(){
+  const cats = Array.from(new Set(TERMS.map(t => t.cat))).sort((a,b)=>a.localeCompare(b));
+  const sel = $("#category");
+  sel.innerHTML = `<option value="All">全部 All</option>` + cats.map(c => `<option value="${escapeHtml(c)}">${escapeHtml(c)}</option>`).join("");
+  sel.value = state.category;
+}
+
+function filterTerms(){
+  const q = normalize(state.search);
+  const levels = state.selectedLevels;
+  const cat = state.category;
+
+  state.filtered = TERMS.filter(t => {
+    if(!levels.has(t.level)) return false;
+    if(cat !== "All" && t.cat !== cat) return false;
+    if(!q) return true;
+    const hay = normalize(`${t.en} ${t.zh} ${t.zhDef} ${t.enDef} ${t.level} ${t.cat}`);
+    return hay.includes(q);
+  });
+}
+
+function masteryStats(list = TERMS){
+  let total = list.length;
+  let mastered = 0;
+  let seen = 0;
+  let fav = 0;
+  let boxes = [0,0,0,0,0,0];
+
+  for(const t of list){
+    const p = termProg(t.id);
+    if(p.seen) seen++;
+    if(p.fav) fav++;
+    boxes[p.box]++;
+    if(p.box >= 5) mastered++;
+  }
+
+  return {total, mastered, seen, fav, boxes};
+}
+
+function renderGlossary(){
+  filterTerms();
+
+  const list = state.filtered;
+  const cards = $("#cards");
+  const counter = $("#counter");
+
+  const {total, mastered, seen, fav} = masteryStats(TERMS);
+  const {mastered: masteredFiltered, total: totalFiltered} = masteryStats(list);
+
+  counter.textContent = `顯示 ${list.length} / ${TERMS.length} 筆（依目前篩選）`;
+
+  // Global mastery bar (all terms)
+  const pct = total ? Math.round((mastered/total)*100) : 0;
+  $("#progressBar").style.width = pct + "%";
+  $("#masteryText").textContent = `整體掌握度：${mastered}/${total}（${pct}%）`;
+
+  // Side stats
+  $("#statSeen").textContent = seen;
+  $("#statMastered").textContent = mastered;
+  $("#statFav").textContent = fav;
+  $("#statTotal").textContent = total;
+
+  // Cards
+  if(list.length === 0){
+    cards.innerHTML = `<div class="def"><h4>沒有結果</h4><p>試試看：清空搜尋、切換等級、或把分類改成「全部」。</p></div>`;
+    return;
+  }
+
+  cards.innerHTML = list.map(t => {
+    const p = termProg(t.id);
+    const dot = levelDotClass(t.level);
+
+    const showZh = (state.lang === "both" || state.lang === "zh");
+    const showEn = (state.lang === "both" || state.lang === "en");
+
+    const title = showEn && showZh ? `${t.en} — ${t.zh}` : (showEn ? t.en : t.zh);
+    const subtitle = t.cat;
+
+    const zhBlock = showZh ? `<div class="def"><h4>中文解釋 ZH</h4><p>${escapeHtml(t.zhDef)}</p></div>` : "";
+    const enBlock = showEn ? `<div class="def"><h4>English Definition</h4><p>${escapeHtml(t.enDef)}</p></div>` : "";
+
+    return `
+      <details class="card" data-id="${escapeHtml(t.id)}">
+        <summary>
+          <span class="badge"><span class="dot ${dot}"></span>${escapeHtml(levelLabel(t.level))}</span>
+          <div class="term">
+            <b title="${escapeHtml(title)}">${escapeHtml(title)}</b>
+            <span title="${escapeHtml(subtitle)}">${escapeHtml(subtitle)}</span>
+          </div>
+          <div class="card-actions">
+            <button class="iconbtn" type="button" data-fav="${escapeHtml(t.id)}" aria-pressed="${p.fav ? "true":"false"}" title="收藏">⭐</button>
+          </div>
+        </summary>
+        <div class="details-body">
+          <div class="defs">
+            ${zhBlock}
+            ${enBlock}
+            <div class="def">
+              <h4>Study Box</h4>
+              <p>Box <b>${p.box}</b> · Seen: <b>${p.seen ? "Yes":"No"}</b> · Correct: <b>${p.correct}</b> · Wrong: <b>${p.wrong}</b></p>
+            </div>
+          </div>
+        </div>
+      </details>
+    `;
+  }).join("");
+
+  // attach events
+  $$('[data-fav]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const id = btn.getAttribute('data-fav');
+      const p = termProg(id);
+      p.fav = p.fav ? 0 : 1;
+      saveProgress();
+      renderGlossary();
+    });
+  });
+
+  // mark seen when opened
+  $$("details.card").forEach(d => {
+    d.addEventListener('toggle', () => {
+      if(d.open){
+        const id = d.getAttribute('data-id');
+        const p = termProg(id);
+        p.seen = 1;
+        p.lastSeen = Date.now();
+        saveProgress();
+        // update side stats without full re-render could be done; keep simple
+        renderSideOnly();
+      }
+    });
+  });
+
+  // Also show filtered mastery on meta line (lightweight)
+  const extra = `｜篩選後掌握：${masteredFiltered}/${totalFiltered}`;
+  if(!counter.textContent.includes("篩選後掌握")) counter.textContent += extra;
+}
+
+function renderSideOnly(){
+  const {total, mastered, seen, fav} = masteryStats(TERMS);
+  const pct = total ? Math.round((mastered/total)*100) : 0;
+  $("#progressBar").style.width = pct + "%";
+  $("#masteryText").textContent = `整體掌握度：${mastered}/${total}（${pct}%）`;
+  $("#statSeen").textContent = seen;
+  $("#statMastered").textContent = mastered;
+  $("#statFav").textContent = fav;
+  $("#statTotal").textContent = total;
+}
+
+// -----------------------------
+// Tabs
+// -----------------------------
+function setTab(name){
+  state.tab = name;
+
+  const tabs = {
+    glossary: {tab:"#tabGlossary", view:"#viewGlossary"},
+    flash: {tab:"#tabFlash", view:"#viewFlash"},
+    quiz: {tab:"#tabQuiz", view:"#viewQuiz"},
+  };
+
+  for(const k of Object.keys(tabs)){
+    $(tabs[k].tab).setAttribute('aria-selected', k===name ? 'true':'false');
+    $(tabs[k].view).classList.toggle('hidden', k!==name);
+  }
+
+  if(name === "glossary"){
+    renderGlossary();
+    $("#search").focus();
+  }
+  if(name === "flash"){
+    startFlash(true);
+  }
+  if(name === "quiz"){
+    startQuiz();
+  }
+}
+
+// -----------------------------
+// Flashcards (simple spaced repetition)
+// -----------------------------
+function isEligibleTerm(t){
+  // keep within current filter
+  if(!state.selectedLevels.has(t.level)) return false;
+  if(state.category !== "All" && t.cat !== state.category) return false;
+  const q = normalize(state.search);
+  if(q){
+    const hay = normalize(`${t.en} ${t.zh} ${t.zhDef} ${t.enDef}`);
+    if(!hay.includes(q)) return false;
+  }
+  return true;
+}
+
+function pickNextFlash(){
+  const pool = TERMS.filter(isEligibleTerm);
+  if(pool.length === 0) return null;
+
+  // weighted random: lower boxes, not mastered
+  const weighted = [];
+  const now = Date.now();
+  for(const t of pool){
+    const p = termProg(t.id);
+    // prioritize not mastered
+    const base = (p.box >= 5) ? 0.4 : (6 - p.box);
+    // recency penalty
+    const hours = p.lastSeen ? (now - p.lastSeen) / 36e5 : 999;
+    const recency = Math.min(2.0, 0.6 + (hours/12)); // more weight if longer ago
+    const w = Math.max(0.2, base * recency);
+    weighted.push({t, w});
+  }
+
+  const sum = weighted.reduce((a,x)=>a+x.w,0);
+  let r = Math.random()*sum;
+  for(const x of weighted){
+    r -= x.w;
+    if(r <= 0) return x.t;
+  }
+  return weighted[weighted.length-1].t;
+}
+
+function renderFlash(){
+  const t = byId(state.flash.currentId);
+  if(!t){
+    $("#flashFront").textContent = "沒有可練習的術語";
+    $("#flashSub").textContent = "請清空搜尋或把分類改成全部";
+    $("#flashBack").classList.add('hidden');
+    return;
+  }
+
+  const p = termProg(t.id);
+
+  $("#flashLevel").textContent = `${levelLabel(t.level)} · Box ${p.box}`;
+  $("#flashCategory").textContent = t.cat;
+
+  const showZh = (state.lang === "both" || state.lang === "zh");
+  const showEn = (state.lang === "both" || state.lang === "en");
+
+  const front = showEn && showZh ? `${t.en} — ${t.zh}` : (showEn ? t.en : t.zh);
+  const sub = showEn && showZh ? "（翻面看中英解釋）" : (showEn ? "(Flip to see the definition)" : "（翻面看解釋）");
+
+  $("#flashFront").textContent = front;
+  $("#flashSub").textContent = sub;
+
+  $("#flashZh").textContent = t.zhDef;
+  $("#flashEn").textContent = t.enDef;
+
+  $("#flashFav").setAttribute('aria-pressed', p.fav ? 'true':'false');
+
+  // stats
+  const all = TERMS.filter(isEligibleTerm);
+  const {total, mastered, boxes} = masteryStats(all.length ? all : TERMS);
+  const pct = total ? Math.round((mastered/total)*100) : 0;
+  $("#flashBar").style.width = pct + "%";
+  $("#flashMastery").textContent = `目前篩選掌握度：${mastered}/${total}（${pct}%）`;
+
+  $("#box1").textContent = boxes[1] || 0;
+  $("#box2").textContent = boxes[2] || 0;
+  $("#box3").textContent = boxes[3] || 0;
+  $("#box4").textContent = boxes[4] || 0;
+  $("#box5").textContent = boxes[5] || 0;
+
+  const idxInfo = `${p.seen ? "已看過" : "新詞"} · Correct ${p.correct} / Wrong ${p.wrong}`;
+  $("#flashCounter").textContent = `抽認卡：${idxInfo}`;
+
+  // flipped state
+  $("#flashBack").classList.toggle('hidden', !state.flash.flipped);
+}
+
+function startFlash(forcePick = false){
+  if(forcePick || !state.flash.currentId){
+    const next = pickNextFlash();
+    state.flash.currentId = next?.id || null;
+    state.flash.flipped = false;
+  }
+  renderFlash();
+}
+
+function flipFlash(){
+  state.flash.flipped = !state.flash.flipped;
+  const t = byId(state.flash.currentId);
+  if(t){
+    const p = termProg(t.id);
+    p.seen = 1;
+    p.lastSeen = Date.now();
+    saveProgress();
+  }
+  renderFlash();
+}
+
+function answerFlash(isCorrect){
+  const t = byId(state.flash.currentId);
+  if(!t) return;
+  const p = termProg(t.id);
+  p.seen = 1;
+  p.lastSeen = Date.now();
+
+  if(isCorrect){
+    p.correct++;
+    p.box = Math.min(5, p.box + 1);
+  }else{
+    p.wrong++;
+    p.box = 1;
+  }
+
+  saveProgress();
+  state.flash.flipped = false;
+  const next = pickNextFlash();
+  state.flash.currentId = next?.id || null;
+  renderFlash();
+}
+
+// -----------------------------
+// Quiz
+// -----------------------------
+function shuffle(arr){
+  const a = [...arr];
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+function buildQuiz(n){
+  const pool = TERMS.filter(isEligibleTerm);
+  const base = pool.length ? pool : TERMS;
+  const picks = shuffle(base).slice(0, Math.min(n, base.length));
+
+  const questions = picks.map((t) => {
+    // distractors: prefer same category, else any
+    const sameCat = base.filter(x => x.id !== t.id && x.cat === t.cat);
+    const fallback = base.filter(x => x.id !== t.id);
+    const dPool = (sameCat.length >= 3) ? sameCat : fallback;
+    const distractors = shuffle(dPool).slice(0,3);
+
+    // Options
+    const opts = shuffle([t, ...distractors]).map(x => ({
+      id: x.id,
+      en: x.en,
+      zh: x.zh,
+      enDef: x.enDef,
+      zhDef: x.zhDef,
+    }));
+
+    return {
+      correctId: t.id,
+      t,
+      opts,
+    };
+  });
+
+  return questions;
+}
+
+function startQuiz(){
+  state.quiz.mode = $("#quizMode")?.value || state.quiz.mode;
+  state.quiz.n = parseInt($("#quizN")?.value || state.quiz.n, 10);
+  state.quiz.questions = buildQuiz(state.quiz.n);
+  state.quiz.idx = 0;
+  state.quiz.correct = 0;
+  state.quiz.locked = false;
+  state.quiz.lastChoice = null;
+  renderQuiz();
+}
+
+function renderQuiz(){
+  const qs = state.quiz.questions;
+  if(!qs.length){
+    $("#qtitle").textContent = "沒有可出題的術語";
+    $("#qprompt").textContent = "請清空搜尋或把分類改成全部";
+    $("#options").innerHTML = "";
+    return;
+  }
+
+  const q = qs[state.quiz.idx];
+  const step = state.quiz.idx + 1;
+  const total = qs.length;
+
+  $("#quizCounter").textContent = `測驗：第 ${step}/${total} 題`;
+  $("#quizCorrect").textContent = state.quiz.correct;
+  $("#quizStep").textContent = `${step}/${total}`;
+
+  const showZh = (state.lang === "both" || state.lang === "zh");
+  const showEn = (state.lang === "both" || state.lang === "en");
+
+  let title = "";
+  let prompt = "";
+
+  if(state.quiz.mode === "term_to_def"){
+    title = "選出最符合的英文定義";
+    const termText = showEn && showZh ? `${q.t.en} — ${q.t.zh}` : (showEn ? q.t.en : q.t.zh);
+    prompt = termText;
+  }else{
+    title = "選出對應的術語";
+    // show both defs for learning, regardless of language toggle (with subtlety)
+    prompt = `${q.t.enDef}\n\n（中文提示）${q.t.zhDef}`;
+  }
+
+  $("#qtitle").textContent = title;
+  $("#qprompt").textContent = prompt;
+
+  const options = $("#options");
+  options.innerHTML = q.opts.map((o, idx) => {
+    const label = (state.quiz.mode === "term_to_def")
+      ? `${o.enDef}\n（中文提示）${o.zhDef}`
+      : (showEn && showZh ? `${o.en} — ${o.zh}` : (showEn ? o.en : o.zh));
+    return `<button class="opt" type="button" data-opt="${escapeHtml(o.id)}" data-idx="${idx}">${escapeHtml(label)}</button>`;
+  }).join("");
+
+  $$(".opt").forEach(btn => {
+    btn.addEventListener('click', () => chooseOption(btn.getAttribute('data-opt')));
+  });
+
+  $("#quizHint").textContent = (state.quiz.mode === "term_to_def")
+    ? "每題選一個最符合的英文定義（選項會附中文提示）。"
+    : "每題選一個最符合的術語（點選後可用 Enter 到下一題）。";
+
+  state.quiz.locked = false;
+}
+
+function chooseOption(optId){
+  if(state.quiz.locked) return;
+  const qs = state.quiz.questions;
+  const q = qs[state.quiz.idx];
+  state.quiz.locked = true;
+
+  const isCorrect = (optId === q.correctId);
+  if(isCorrect) state.quiz.correct++;
+
+  // Mark seen + update box lightly (optional): correct => +1, wrong => keep
+  const p = termProg(q.correctId);
+  p.seen = 1;
+  p.lastSeen = Date.now();
+  if(isCorrect){
+    p.correct++;
+    p.box = Math.min(5, p.box + 1);
+  }else{
+    p.wrong++;
+  }
+  saveProgress();
+
+  // UI feedback
+  $$(".opt").forEach(btn => {
+    const id = btn.getAttribute('data-opt');
+    btn.disabled = true;
+    if(id === q.correctId) btn.classList.add('correct');
+    if(id === optId && !isCorrect) btn.classList.add('wrong');
+  });
+
+  // auto-advance hint
+  setTimeout(() => {
+    // keep user control via Enter, but allow quick click -> proceed
+  }, 120);
+
+  // update stats
+  $("#quizCorrect").textContent = state.quiz.correct;
+}
+
+function nextQuiz(){
+  const qs = state.quiz.questions;
+  if(!qs.length) return;
+
+  if(!state.quiz.locked) return; // require answer first
+
+  if(state.quiz.idx < qs.length - 1){
+    state.quiz.idx++;
+    renderQuiz();
+  }else{
+    // finished
+    const total = qs.length;
+    const score = state.quiz.correct;
+    $("#qtitle").textContent = "完成！";
+    $("#qprompt").textContent = `你的分數：${score}/${total}。\n\n建議：把等級篩選到你最弱的那層，再做一次。`;
+    $("#options").innerHTML = "";
+    state.quiz.locked = true;
+    renderSideOnly();
+  }
+}
+
+// -----------------------------
+// Events
+// -----------------------------
+function bind(){
+  // Search
+  $("#search").addEventListener('input', (e) => {
+    state.search = e.target.value;
+    renderGlossary();
+  });
+
+  // Level chips
+  $$(".chip").forEach(chip => {
+    chip.addEventListener('click', () => {
+      const lv = chip.getAttribute('data-level');
+      const on = chip.getAttribute('aria-pressed') === 'true';
+      chip.setAttribute('aria-pressed', on ? 'false':'true');
+      if(on) state.selectedLevels.delete(lv);
+      else state.selectedLevels.add(lv);
+
+      // prevent selecting none
+      if(state.selectedLevels.size === 0){
+        state.selectedLevels.add(lv);
+        chip.setAttribute('aria-pressed', 'true');
+      }
+
+      saveUI();
+      renderGlossary();
+    });
+  });
+
+  // Category
+  $("#category").addEventListener('change', (e) => {
+    state.category = e.target.value;
+    saveUI();
+    renderGlossary();
+  });
+
+  // Language
+  $("#lang").addEventListener('change', (e) => {
+    state.lang = e.target.value;
+    saveUI();
+    renderGlossary();
+    renderFlash();
+    renderQuiz();
+  });
+
+  // Tabs
+  $("#tabGlossary").addEventListener('click', () => setTab('glossary'));
+  $("#tabFlash").addEventListener('click', () => setTab('flash'));
+  $("#tabQuiz").addEventListener('click', () => setTab('quiz'));
+
+  // Quick buttons
+  $("#btnStartFlash").addEventListener('click', () => setTab('flash'));
+  $("#btnStartQuiz").addEventListener('click', () => setTab('quiz'));
+
+  // Help dialog
+  const dlg = $("#dlgHelp");
+  $("#btnHelp").addEventListener('click', () => dlg.showModal());
+  $("#btnCloseHelp").addEventListener('click', () => dlg.close());
+
+  // Reset
+  $("#btnReset").addEventListener('click', () => {
+    const ok = confirm("確定要重置進度嗎？這會清除你在此瀏覽器的學習紀錄。");
+    if(!ok) return;
+    state.progress = defaultProgress();
+    saveProgress();
+    renderGlossary();
+    startFlash(true);
+    startQuiz();
+  });
+
+  // Flash buttons
+  $("#btnFlip").addEventListener('click', flipFlash);
+  $("#btnNo").addEventListener('click', () => answerFlash(false));
+  $("#btnYes").addEventListener('click', () => answerFlash(true));
+  $("#btnNext").addEventListener('click', () => { state.flash.flipped=false; startFlash(true); });
+  $("#btnBackToGlossary1").addEventListener('click', () => setTab('glossary'));
+
+  $("#flashFav").addEventListener('click', () => {
+    const id = state.flash.currentId;
+    if(!id) return;
+    const p = termProg(id);
+    p.fav = p.fav ? 0 : 1;
+    saveProgress();
+    renderFlash();
+    renderSideOnly();
+  });
+
+  // Quiz controls
+  $("#btnNewQuiz").addEventListener('click', startQuiz);
+  $("#btnBackToGlossary2").addEventListener('click', () => setTab('glossary'));
+  $("#quizMode").addEventListener('change', startQuiz);
+  $("#quizN").addEventListener('change', startQuiz);
+
+  // Keyboard shortcuts
+  window.addEventListener('keydown', (e) => {
+    // Ignore when typing in inputs
+    const tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : "";
+    const isTyping = tag === 'input' || tag === 'textarea' || tag === 'select';
+
+    if(e.key === '/' && !isTyping){
+      e.preventDefault();
+      setTab('glossary');
+      $("#search").focus();
+      return;
+    }
+
+    if(!isTyping && (e.key === 'f' || e.key === 'F')){ e.preventDefault(); setTab('flash'); return; }
+    if(!isTyping && (e.key === 'q' || e.key === 'Q')){ e.preventDefault(); setTab('quiz'); return; }
+
+    if(state.tab === 'flash'){
+      if(e.code === 'Space'){ e.preventDefault(); flipFlash(); return; }
+      if(e.key === '1'){ e.preventDefault(); answerFlash(false); return; }
+      if(e.key === '2'){ e.preventDefault(); answerFlash(true); return; }
+      if(e.key === 'n' || e.key === 'N'){ e.preventDefault(); state.flash.flipped=false; startFlash(true); return; }
+    }
+
+    if(state.tab === 'quiz'){
+      if(['1','2','3','4'].includes(e.key)){
+        const idx = parseInt(e.key,10)-1;
+        const btn = $$(".opt")[idx];
+        if(btn && !btn.disabled){ btn.click(); }
+        return;
+      }
+      if(e.key === 'Enter'){
+        nextQuiz();
+        return;
+      }
+    }
+  });
+}
+
+// -----------------------------
+// Init
+// -----------------------------
+function init(){
+  loadUI();
+  loadProgress();
+  computeCategories();
+
+  // apply UI state
+  $("#lang").value = state.lang;
+  $("#category").value = state.category;
+
+  $$(".chip").forEach(chip => {
+    const lv = chip.getAttribute('data-level');
+    chip.setAttribute('aria-pressed', state.selectedLevels.has(lv) ? 'true':'false');
+  });
+
+  bind();
+
+  // initial render
+  renderGlossary();
+  startFlash(true);
+  startQuiz();
+
+  // focus search by default
+  $("#search").focus();
+}
+
+init();
